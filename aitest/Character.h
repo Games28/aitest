@@ -1,15 +1,15 @@
 #pragma once
-#include "constants.h"
-#include <math.h>
-#include "SDL.h"
 #include "Map.h"
+#include <math.h>
+class rayCast;
 class Character
 {
 public:
 	Character() = default;
 	void movePlayer(float deltaTime);
-	void renderPlayer(SDL_Renderer* render);
-
+	void enemymove(float deltaTime);
+	
+	
 public:
 	float x;
 	float y;
@@ -23,6 +23,7 @@ public:
 	int islookingupdown;
 	float lookUpDown;
 	float playerLookAngle;
+	bool playerfound = false;
 	Map map;
 };
 

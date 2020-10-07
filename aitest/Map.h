@@ -1,13 +1,13 @@
 #pragma once
-#include "constants.h"
-#include <limits.h>
+#include "Constants.h"
 #include <math.h>
-#include <SDL.h>
 class Map
 {
 public:
 	Map() = default;
-	const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
+
+public:
+	const  int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -25,9 +25,16 @@ public:
 
 	};
 
-	int mapHasWallAt(float x, float y);
-	void renderMap(SDL_Renderer* render);
-public:
+	int mapHasWallAt(float x, float y) {
+		if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT) {
+			return true;
+		}
+		int mapGridIndexX = floor(x / TILE_SIZE);
+		int mapGridIndexY = floor(y / TILE_SIZE);
+		return map[mapGridIndexY][mapGridIndexX] != 0;
+
+	}
+
 	
 };
 
